@@ -12,7 +12,7 @@ class Provenanced < Formula
 
   def install
     ENV["VERSION"] = "v#{version}" unless build.head?
-    ENV["WITH_LEDGER"] = "false"
+    #ENV["WITH_LEDGER"] = "false"
     system "make", "build"
 
     bin.install "build/provenanced"
