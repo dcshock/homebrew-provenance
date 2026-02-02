@@ -11,9 +11,26 @@ class Provenanced < Formula
   depends_on "go@1.23" => :build
 
   def install
-    ENV["VERSION"] = "v#{version}" unless build.head?
-    #ENV["WITH_LEDGER"] = "false"
-    system "make", "build"
+    ENV["CGO_CFLAGS"] = ""
+    ENV["CGO_LDFLAGS"] = ""
+
+    ldflags = %W[
+      -w -s
+      -X github.com/cosmos/cosmos-sdk/version.Name=Provenance
+      -X github.com/cosmos/cosmos-sdk/version.AppName=provenanced
+      -X github.com/cosmos/cosmos-sdk/version.Commit=unknown
+      -X github.com/cosmos/cosmos-sdk/version.BuildTags=ledger,
+      -X github.com/cometbft/cometbft/version.TMCoreSemVer=v0.38.21
+      -X github.com/cosmos/cosmos-sdk/version.Version=nobranch-unknown
+    ].join(" ")
+
+    system "go", "build",
+      "-mod=readonly",
+      "-tags", "ledger",
+      "-trimpath",
+      "-ldflags", ldflags,
+      "-o", "provenanced",
+      "./cmd/provenanced"
 
     bin.install "build/provenanced"
   end
