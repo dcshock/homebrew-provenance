@@ -11,6 +11,8 @@ class Provenanced < Formula
   depends_on "go@1.23" => :build
 
   def install
+    ENV["WITH_LEDGER"] = "false"
+
     system "make", "build"
 
     bin.install "build/provenanced"
