@@ -11,6 +11,7 @@ class ProvenancedAT1272 < Formula
   depends_on "go@1.23" => :build
 
   def install
+    ENV["VERSION"] = "1.27.2"
     ENV["WITH_LEDGER"] = "false"
 
     system "make", "build"
