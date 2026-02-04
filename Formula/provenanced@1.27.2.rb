@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProvenancedA1272 < Formula
+class ProvenancedAT1272 < Formula
   desc "Provenance Blockchain CLI (provenanced)"
   homepage "https://github.com/provenance-io/provenance"
   url "https://github.com/provenance-io/provenance/archive/refs/tags/v1.27.2.tar.gz"
